@@ -2,7 +2,7 @@ package com.myshop.service;
 
 import com.myshop.entity.Member;
 import com.myshop.repository.MemberRepository;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

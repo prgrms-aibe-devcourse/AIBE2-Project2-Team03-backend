@@ -1,7 +1,7 @@
 package com.myshop.entity;
 
 import com.myshop.contant.ItemSellStatus;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
