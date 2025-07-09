@@ -65,7 +65,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                 .selectFrom(QItem.item)
                 .where(
                         regDtsAfter(itemSearchDto.getSearchDateType()),
-                        searchSellStatusEq(itemSearchDto.getItemSellStatus()),
+                        searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
                         searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery())
                 )
                 .orderBy(QItem.item.id.desc())
@@ -75,7 +75,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
 
         Long total = queryFactory.select(Wildcard.count).from(QItem.item)
                 .where(regDtsAfter(itemSearchDto.getSearchDateType()),
-                        searchSellStatusEq(itemSearchDto.getItemSellStatus()),
+                        searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
                         searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery()))
                 .fetchOne();
 
