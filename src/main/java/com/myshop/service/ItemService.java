@@ -3,6 +3,7 @@ package com.myshop.service;
 import com.myshop.dto.ItemFormDto;
 import com.myshop.dto.ItemImgDto;
 import com.myshop.dto.ItemSearchDto;
+import com.myshop.dto.MainItemDto;
 import com.myshop.entity.Item;
 import com.myshop.entity.ItemImg;
 import com.myshop.repository.ItemImgRepository;
@@ -49,7 +50,7 @@ public class ItemService {
     }
 
     @Transactional(readOnly = true)
-    public ItemFormDto getItemDtl(Long itemId) {
+    public ItemFormDto getItemDetail(Long itemId) {
         List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
         List<ItemImgDto> itemImgDtoList = new ArrayList<>();
 
@@ -84,5 +85,10 @@ public class ItemService {
     @Transactional(readOnly = true)
     public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
 }

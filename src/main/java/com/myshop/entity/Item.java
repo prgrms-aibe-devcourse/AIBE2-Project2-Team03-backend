@@ -1,14 +1,12 @@
 package com.myshop.entity;
 
-import com.myshop.contant.ItemSellStatus;
+import com.myshop.constant.ItemSellStatus;
 import javax.persistence.*;
 
 import com.myshop.dto.ItemFormDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name="t_item")

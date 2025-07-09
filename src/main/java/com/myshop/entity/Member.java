@@ -1,6 +1,6 @@
 package com.myshop.entity;
 
-import com.myshop.contant.Role;
+import com.myshop.constant.Role;
 import com.myshop.dto.MemberFormDto;
 import javax.persistence.*;
 import lombok.Getter;

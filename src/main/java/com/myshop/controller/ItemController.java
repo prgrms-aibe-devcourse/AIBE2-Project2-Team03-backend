@@ -2,6 +2,7 @@ package com.myshop.controller;
 
 import com.myshop.dto.ItemFormDto;
 import com.myshop.dto.ItemSearchDto;
+import com.myshop.dto.MainItemDto;
 import com.myshop.entity.Item;
 import com.myshop.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -57,19 +58,13 @@ public class ItemController {
         return "redirect:/";
     }
 
-    @GetMapping("/admin/item/{itemId}")
-    public String itemDtl(@RequestParam("itemId") Long itemId, Model model) {
+    @GetMapping("/item/{itemId}")
+    public String itemDetail(Model model, @PathVariable("itemId") Long itemId) {
 
-        try {
-            ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
-            model.addAttribute("itemFormDto", itemFormDto);
-        } catch (EntityNotFoundException e) {
-            model.addAttribute("errorMessage", "해당 상품을 찾을 수 없습니다.");
-            model.addAttribute("itemFormDto", new ItemFormDto());
-            return "item/itemForm";
-        }
+        ItemFormDto itemFormDto = itemService.getItemDetail(itemId);
+        model.addAttribute("item", itemFormDto);
 
-        return "item/itemDtl";
+        return "item/itemDetail";
     }
 
     @GetMapping(value = {"/admin/items", "/admin/items/{page}"})

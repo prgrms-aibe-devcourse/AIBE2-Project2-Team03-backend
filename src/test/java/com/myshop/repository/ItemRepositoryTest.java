@@ -1,6 +1,6 @@
 package com.myshop.repository;
 
-import com.myshop.contant.ItemSellStatus;
+import com.myshop.constant.ItemSellStatus;
 import com.myshop.entity.Item;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
