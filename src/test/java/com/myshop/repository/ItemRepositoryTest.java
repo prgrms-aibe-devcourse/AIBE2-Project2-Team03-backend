@@ -2,8 +2,8 @@ package com.myshop.repository;
 
 import com.myshop.contant.ItemSellStatus;
 import com.myshop.entity.Item;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
