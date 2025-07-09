@@ -82,6 +82,6 @@ public class ItemController {
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage", 5); // 페이지네이션을 위한 최대 페이지 수 설정
 
-        return "item/itemMng";
+        return "item/itemManage";
     }
 }
