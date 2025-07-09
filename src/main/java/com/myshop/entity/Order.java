@@ -1,6 +1,6 @@
 package com.myshop.entity;
 
-import com.myshop.contant.OrderStatus;
+import com.myshop.constant.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
