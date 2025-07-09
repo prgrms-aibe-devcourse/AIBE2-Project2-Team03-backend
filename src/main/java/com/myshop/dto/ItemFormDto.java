@@ -32,7 +32,7 @@ public class ItemFormDto {
 
     private static ModelMapper mapper = new ModelMapper();
 
-    public static ItemFormDto from(Item item) {
+    public static ItemFormDto of(Item item) {
         return mapper.map(item, ItemFormDto.class);
     }
     public Item createItem() {

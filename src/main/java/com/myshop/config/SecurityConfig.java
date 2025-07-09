@@ -25,17 +25,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .loginPage("/member/login")
+                .loginPage("/members/login")
                     .defaultSuccessUrl("/")
                 .usernameParameter("email")
-                    .failureForwardUrl("/member/login/error")
+                    .failureUrl("/members/login/error")
                 .and()
                 .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
-                    .logoutSuccessUrl("/");
+                    .logoutSuccessUrl("/")
+                .and()
+                    .csrf().ignoringAntMatchers("/h2-console/**") // ← CSRF 무시
+                .and()
+                    .headers().frameOptions().sameOrigin(); // ← iframe 허용
 
         http.authorizeRequests()
-                .mvcMatchers("/", "/member/**", "/item/**", "/images/**").permitAll()
+                .mvcMatchers("/", "/members/**", "/item/**", "/images/**", "/h2-console/**").permitAll()
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
 

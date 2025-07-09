@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class ItemImg {
+public class ItemImg extends BaseEntity {
 
     @Id
     @Column(name="item_img_id")
