@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class Order {
+public class Order extends BaseEntity {
 
     @Id
     @Column(name="order_id")
@@ -34,6 +34,25 @@ public class Order {
 
     private LocalDateTime orderDate;
 
-    private LocalDateTime regTime; // 주문 등록 시간
-    private LocalDateTime updateTime; // 주문 수정 시간
+    public static Order createOrder(Member member, List<OrderItem> orderItems) {
+        Order order = new Order();
+        order.setMember(member);
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+        }
+        order.setOrderStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public int getTotalPrice() {
+        return orderItems.stream()
+                .mapToInt(OrderItem::getTotalPrice)
+                .sum(); // 주문한 상품들의 총 가격 계산
+    }
 }

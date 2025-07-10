@@ -5,14 +5,13 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name="t_orderitem")
 @Getter
 @Setter
 @ToString
-public class OrderItem {
+public class OrderItem extends BaseEntity {
 
     @Id
     @Column(name="order_item_id")
@@ -29,6 +28,16 @@ public class OrderItem {
     private int orderPrice; // 주문한 상품 가격
     private int count; // 주문한 상품 수량
 
-    private LocalDateTime regTime; // 주문 아이템 등록 시간
-    private LocalDateTime updateTime; // 주문 아이템 수정 시간
+    public static OrderItem createOrderItem(Item item, int count) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setCount(count);
+        orderItem.setOrderPrice(item.getPrice());
+        item.removeStock(count); // 주문 수량만큼 재고 감소
+        return orderItem;
+    }
+
+    public int getTotalPrice() {
+        return this.orderPrice * this.count; // 총 주문 가격 계산
+    }
 }
