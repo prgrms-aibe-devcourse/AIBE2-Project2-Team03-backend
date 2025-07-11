@@ -2,6 +2,7 @@ package com.myshop.controller;
 
 import com.myshop.dto.OrderDto;
 import com.myshop.dto.OrderHistoryDto;
+import com.myshop.service.KakaoPayService;
 import com.myshop.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -25,6 +27,7 @@ import java.util.Optional;
 public class OrderController {
 
     private final OrderService orderService;
+    private final KakaoPayService kakaoPayService;
 
     @PostMapping("/order")
     public @ResponseBody ResponseEntity order(@RequestBody @Valid OrderDto orderDto,
@@ -44,14 +47,16 @@ public class OrderController {
 
         String email = principal.getName();
         Long orderId;
+        String result;
 
         try {
             orderId = orderService.order(orderDto, email);
+            result = kakaoPayService.readyPay(orderId, email);
         } catch (Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
+        return new ResponseEntity<>(Map.of("redirectUrl", result), HttpStatus.OK);
     }
 
     @GetMapping(value = {"/orders", "/orders/{page}"})

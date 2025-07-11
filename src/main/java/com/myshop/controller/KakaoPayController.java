@@ -17,12 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class KakaoPayController {
   private final KakaoPayService kakaoPayService;
   
-  @GetMapping(value = "/kakaopay/ready")
-  public @ResponseBody ResponseEntity readyPay() {
-    KakaoPayReadyDto kakaoPayReadyDto = kakaoPayService.readyPay();
-    return new ResponseEntity<>(kakaoPayReadyDto, HttpStatus.OK);
-  }
-  
   @GetMapping(value = "/kakaopay/success")
   public String acceptPay(@RequestParam("pg_token") String pgToken) {
     kakaoPayService.acceptPay(pgToken);
