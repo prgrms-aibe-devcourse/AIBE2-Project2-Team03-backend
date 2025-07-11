@@ -1,4 +1,4 @@
-package com.myshop.contant;
+package com.myshop.constant;
 
 public enum Role {
     USER, ADMIN;
