@@ -55,4 +55,11 @@ public class Order extends BaseEntity {
                 .mapToInt(OrderItem::getTotalPrice)
                 .sum(); // 주문한 상품들의 총 가격 계산
     }
+
+    public void cancelOrder() {
+        this.orderStatus = OrderStatus.CANCEL;
+        for (OrderItem orderItem : orderItems) {
+            orderItem.cancel(); // 주문 취소 시 각 주문 아이템의 재고를 증가시킴
+        }
+    }
 }
