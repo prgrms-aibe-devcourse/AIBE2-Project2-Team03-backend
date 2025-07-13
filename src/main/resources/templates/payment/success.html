@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<div layout:fragment="content">
+    <div class="container">
+        <h2>결제 완료</h2>
+        <div class="alert alert-success">
+            <h4>결제가 성공적으로 완료되었습니다!</h4>
+            <p>주문번호: <span th:text="${orderId}"></span></p>
+            <p>결제 금액: <span th:text="${payment.amount.total}"></span>원</p>
+            <p>상품명: <span th:text="${payment.itemName}"></span></p>
+        </div>
+        <a href="/orders" class="btn btn-primary">주문 내역 보기</a>
+        <a href="/" class="btn btn-secondary">메인으로</a>
+    </div>
+</div>
+
+</html>
