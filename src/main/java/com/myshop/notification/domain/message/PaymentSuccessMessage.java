@@ -7,8 +7,7 @@ public class PaymentSuccessMessage extends NotificationMessage {
     private final String orderNumber;
     private final String formattedContent;
 
-    public PaymentSuccessMessage(String to, String username, int amount, String orderNumber) {
-        super(to);
+    public PaymentSuccessMessage(String username, int amount, String orderNumber) {
         this.username = username;
         this.amount = amount;
         this.orderNumber = orderNumber;
