@@ -7,6 +7,11 @@ import com.myshop.dto.PaymentApprovalDto;
 import com.myshop.dto.PaymentDto;
 import com.myshop.dto.PaymentReadyDto;
 import com.myshop.entity.Payment;
+import com.myshop.entity.Member;
+import com.myshop.entity.Item;
+
+import com.myshop.repository.ItemRepository;
+import com.myshop.repository.MemberRepository;
 import com.myshop.service.OrderService;
 import com.myshop.service.PaymentService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +27,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -35,6 +41,9 @@ public class OrderController {
 
     private final OrderService orderService;
     private final PaymentService paymentService;
+
+    private final MemberRepository memberRepository;    //  메시지 보낼 때 필요할수도?
+    private final ItemRepository itemRepository;    // 미리작성
 
     @PostMapping("/order")
     public @ResponseBody ResponseEntity order(@RequestBody @Valid OrderDto orderDto,
@@ -142,6 +151,34 @@ public class OrderController {
             
             Long orderId = orderService.order(orderDto, principal.getName());
             
+
+            //
+            // try {
+            //     // 회원 정보 조회
+            //     Member member = memberRepository.findByEmail(principal.getName());
+                
+            //     // 결제 정보 조회 (이미 위에서 조회했지만 명시적으로 표시)
+            //     // Payment payment = paymentService.getPaymentByTid(tid);
+                
+            //     // 상품 정보 조회
+            //     Item item = itemRepository.findById(payment.getItemId())
+            //             .orElseThrow(() -> new EntityNotFoundException("상품 정보를 찾을 수 없습니다."));
+                
+            //     // 메시지 발송을 위한 정보 수집
+            //     String memberName = member.getName();           // 회원 이름
+            //     String memberEmail = member.getEmail();         // 회원 이메일  
+            //     String memberAddress = member.getAddress();     // 회원 주소
+            //     Integer paymentAmount = payment.getTotalAmount(); // 결제 금액
+            //     String itemInfo = item.getItemName();           // 상품명
+                
+            //     // 메시지 발송 함수 호출
+            //     massage(memberName, memberEmail, memberAddress, paymentAmount, itemInfo);
+                
+            // } catch (Exception e) {
+            //     log.error("메시지 발송 실패: ", e);
+            // }
+
+
             // 세션 정리
             session.removeAttribute("paymentTid");
             
