@@ -42,8 +42,8 @@ public class OrderController {
     private final OrderService orderService;
     private final PaymentService paymentService;
 
-    private final MemberRepository memberRepository;    //  메시지 보낼 때 필요할수도?
-    private final ItemRepository itemRepository;    // 미리작성
+    // private final MemberRepository memberRepository;    //  메시지 보낼 때 필요할 수 있어서
+    // private final ItemRepository itemRepository;    // 미리작성
 
     @PostMapping("/order")
     public @ResponseBody ResponseEntity order(@RequestBody @Valid OrderDto orderDto,
