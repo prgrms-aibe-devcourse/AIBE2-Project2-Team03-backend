@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "slackClient", url = "${slack.webhook.url}")
-public class SlackClient {
+public interface SlackClient {
 
     @PostMapping
-    void sendSlackMessage(@RequestBody SlackMessageDto slackMessageDto) {}
+    void sendSlackMessage(@RequestBody SlackMessageDto slackMessageDto);
 }
