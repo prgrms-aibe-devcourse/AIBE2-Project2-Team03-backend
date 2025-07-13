@@ -1,24 +1,23 @@
 package com.myshop.notification.service;
 
-import com.myshop.entity.Member;
 import com.myshop.notification.domain.constant.NotificationType;
 import com.myshop.notification.domain.message.NotificationMessage;
 import com.myshop.notification.repository.NotificationAgreementRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class NotificationService {
 
     private final NotificationAgreementRepository notificationAgreementRepository;
 
     private final List<NotificationSender> notificationSenders;
 
+    @Async("threadPoolTaskExecutor")
     public void notify(Long memberId, NotificationMessage message) {
 
         List<NotificationType> agreedNotificationTypes = notificationAgreementRepository.findAgreedNotificationTypesByMemberId(memberId);
