@@ -89,8 +89,7 @@ public class OrderController {
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
 
-    // ========== 결제 관련 메서드들 (기존 PaymentController에서 이동) ==========
-    
+    // 결제 관련 코드
     @PostMapping("/order/payment/ready")
     public @ResponseBody ResponseEntity paymentReady(@RequestBody @Valid PaymentDto paymentDto,
                                                      BindingResult bindingResult,
