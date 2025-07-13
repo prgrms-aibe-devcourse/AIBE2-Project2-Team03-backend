@@ -1,6 +1,7 @@
 package com.myshop.service;
 
 import com.myshop.entity.Member;
+import com.myshop.notification.service.NotificationAgreementService;
 import com.myshop.repository.MemberRepository;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +17,12 @@ import org.springframework.stereotype.Service;
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
+    private final NotificationAgreementService notificationAgreementService;
 
     public void saveMember(Member member) {
         validateDuplicateMember(member); // 중복 회원 검증
         memberRepository.save(member);
+        notificationAgreementService.createNotificationAgreement(member.getId());
     }
 
     private void validateDuplicateMember(Member member) {
