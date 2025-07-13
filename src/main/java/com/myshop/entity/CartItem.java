@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class CartItem {
+public class CartItem extends BaseEntity {
 
     @Id
     @Column(name="cart_item_id")
@@ -26,4 +26,16 @@ public class CartItem {
     private Item item; // 장바구니에 담긴 상품
 
     private int count; // 장바구니에 담긴 상품 수량
+
+    public static CartItem createCartItem(Cart cart, Item item, int count) {
+        CartItem cartItem = new CartItem();
+        cartItem.setCart(cart);
+        cartItem.setItem(item);
+        cartItem.setCount(count);
+        return cartItem;
+    }
+
+    public void addCount(int count) {
+        this.count += count; // 장바구니에 담긴 상품 수량 증가
+    }
 }
