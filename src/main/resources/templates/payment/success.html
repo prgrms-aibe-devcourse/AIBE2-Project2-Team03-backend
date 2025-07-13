@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <script>
+        $(document).ready(function() {
+            let countdown = 3;
+            
+            // 카운트다운 업데이트
+            const countdownInterval = setInterval(function() {
+                countdown--;
+                $('#countdown').text(countdown);
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    
+                    // PC 환경에서 팝업으로 열렸는지 확인
+                    if (window.opener && !window.opener.closed) {
+                        // 팝업인 경우: 부모창을 구매 이력으로 이동시키고 팝업 닫기
+                        window.opener.location.href = '/orders';
+                        window.close();
+                    } else {
+                        // 일반 창인 경우 (모바일 등): 그냥 구매 이력으로 이동
+                        window.location.href = '/orders';
+                    }
+                }
+            }, 1000); // 1초마다 업데이트
+        });
+    </script>
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <h2>결제 완료</h2>
+        <div class="alert alert-success">
+            <h4>결제가 성공적으로 완료되었습니다!</h4>
+            <p>주문번호: <span th:text="${orderId}"></span></p>
+            <p>결제 금액: <span th:text="${payment.amount != null ? payment.amount.total : '0'}"></span>원</p>
+            <p>상품명: <span th:text="${payment.itemName}"></span></p>
+        </div>
+        
+        <div class="alert alert-info">
+            <h5><i class="fas fa-info-circle"></i> 자동 이동 안내</h5>
+            <p><span id="countdown">3</span>초 후 주문 내역 페이지로 자동 이동합니다.</p>
+            <p>바로 이동하시려면 아래 버튼을 클릭하세요.</p>
+        </div>
+        <a href="/orders" class="btn btn-primary">주문 내역 보기</a>
+        <a href="/" class="btn btn-secondary">메인으로</a>
+    </div>
+</div>
+
+</html>

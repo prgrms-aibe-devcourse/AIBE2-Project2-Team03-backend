@@ -26,6 +26,10 @@ public class Order extends BaseEntity {
     @JoinColumn(name="member_id")
     private Member member; // 주문을 한 회원
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_id")
+    private Payment payment; // 결제 정보
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>(); // 주문한 상품 목록
 
