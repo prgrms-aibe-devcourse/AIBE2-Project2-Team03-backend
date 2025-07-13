@@ -72,9 +72,9 @@ public class PaymentService {
         requestData.put("quantity", paymentDto.getCount());
         requestData.put("total_amount", item.getPrice() * paymentDto.getCount());
         requestData.put("tax_free_amount", 0);
-        requestData.put("approval_url", domain + "/payment/approval");
-        requestData.put("cancel_url", domain + "/payment/cancel");
-        requestData.put("fail_url", domain + "/payment/fail");
+        requestData.put("approval_url", domain + "/order/payment/approval");
+        requestData.put("cancel_url", domain + "/order/payment/cancel");
+        requestData.put("fail_url", domain + "/order/payment/fail");
         
         // 헤더 설정
         HttpHeaders headers = new HttpHeaders();
