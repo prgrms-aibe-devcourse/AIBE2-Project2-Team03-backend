@@ -33,6 +33,7 @@ build/
 .vscode/
 
 upload/
+.env
 
 
 /src/main/resources/application-pay.properties
