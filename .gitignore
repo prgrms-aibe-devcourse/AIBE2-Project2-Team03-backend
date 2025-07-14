@@ -34,3 +34,6 @@ build/
 
 upload/
 .env
+
+
+/src/main/resources/application-pay.properties

@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .headers().frameOptions().sameOrigin(); // ← iframe 허용
 
         http.authorizeRequests()
-                .mvcMatchers("/", "/members/**", "/item/**", "/images/**", "/h2-console/**").permitAll()
+                .mvcMatchers("/", "/kakaopay/**", "/members/**", "/item/**", "/images/**", "/h2-console/**").permitAll()
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
