@@ -18,5 +18,8 @@ public class KakaoPayApproveDto {
     private int tax_free;
     private int vat;
   }
-  
+
+  public int getTotalAmount() {
+    return amount != null ? amount.total : 0;
+  }
 }
