@@ -1,5 +1,6 @@
 package com.myshop.service;
 
+import com.myshop.dto.KakaoPayApproveDto;
 import com.myshop.dto.KakaoPayReadyDto;
 import com.myshop.entity.Order;
 import com.myshop.entity.OrderItem;
@@ -67,7 +68,7 @@ public class KakaoPayService {
   }
   
   
-  public void acceptPay(String pgToken) {
+  public KakaoPayApproveDto acceptPay(String pgToken) {
     Map<String, String> params = new HashMap<>();
     params.put("cid", kakaoPayProperties.getCId());
     params.put("tid", kakaoPayReady.getTid());
@@ -77,10 +78,8 @@ public class KakaoPayService {
     
     HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(params, this.getHeaders());
     
-    Map result = restTemplate.postForObject("https://open-api.kakaopay.com/online/v1/payment/approve", requestEntity, Map.class);
+    KakaoPayApproveDto result = restTemplate.postForObject("https://open-api.kakaopay.com/online/v1/payment/approve", requestEntity, KakaoPayApproveDto.class);
     
-    System.out.println();
-    System.out.println(result);
-    System.out.println();
+    return result;
   }
 }

@@ -1,5 +1,6 @@
 package com.myshop.controller;
 
+import com.myshop.dto.KakaoPayApproveDto;
 import com.myshop.dto.KakaoPayReadyDto;
 import com.myshop.service.KakaoPayService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,8 @@ public class KakaoPayController {
   
   @GetMapping(value = "/kakaopay/success")
   public String acceptPay(@RequestParam("pg_token") String pgToken) {
-    kakaoPayService.acceptPay(pgToken);
+    KakaoPayApproveDto result = kakaoPayService.acceptPay(pgToken);
+    // send slack message
     return "redirect:/";
   }
 }
