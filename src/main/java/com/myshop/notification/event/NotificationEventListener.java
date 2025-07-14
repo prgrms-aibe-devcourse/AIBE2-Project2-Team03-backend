@@ -18,6 +18,6 @@ public class NotificationEventListener {
     @EventListener
     public void handleNotificationEvent(NotificationEvent event) {
         log.info("Received notification event: {}", event);
-        notificationService.notify(event.getMemberId(), event.getMessage());
+        notificationService.notify(event.getEmail(), event.getMessage());
     }
 }

@@ -1,8 +1,10 @@
 package com.myshop.notification.service;
 
+import com.myshop.entity.Member;
 import com.myshop.notification.domain.constant.NotificationType;
 import com.myshop.notification.domain.message.NotificationMessage;
 import com.myshop.notification.repository.NotificationAgreementRepository;
+import com.myshop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,10 +19,12 @@ public class NotificationService {
     private final NotificationAgreementRepository notificationAgreementRepository;
 
     private final List<NotificationSender> notificationSenders;
+    private final MemberRepository memberRepository;
 
-    public void notify(Long memberId, NotificationMessage message) {
+    public void notify(String email, NotificationMessage message) {
 
-        List<NotificationType> agreedNotificationTypes = notificationAgreementRepository.findAgreedNotificationTypesByMemberId(memberId);
+        Member member = memberRepository.findByEmail(email);
+        List<NotificationType> agreedNotificationTypes = notificationAgreementRepository.findAgreedNotificationTypesByMemberId(member.getId());
 
         log.info("Agreed notification types: {}", agreedNotificationTypes);
         for (NotificationType notificationType : agreedNotificationTypes) {

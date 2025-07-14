@@ -6,11 +6,11 @@ import lombok.Getter;
 @Getter
 public class NotificationEvent {
 
-    private final Long memberId;
+    private final String email;
     private final NotificationMessage message;
 
-    public NotificationEvent(Long memberId, NotificationMessage message) {
-        this.memberId = memberId;
+    public NotificationEvent(String email, NotificationMessage message) {
+        this.email = email;
         this.message = message;
     }
 }
